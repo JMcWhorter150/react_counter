@@ -6,21 +6,23 @@ class CounterApp extends React.Component {
         super(props);
 
         this.state = {
-            counter: 0
+            counter: 0,
+            color: 'red'
         }
     }
 
     render() {
         return (
         <div>
-            <CounterButton counter={this.state.counter} countUp={this._countUp} />
+            <CounterButton counter={this.state.counter} countUp={this._countUp} color={this.state.color} />
         </div>
         )
     }
 
     _countUp = () => {
         this.setState({
-            counter: this.state.counter + 1
+            counter: this.state.counter + 1,
+            color: this.state.counter % 2 === 0 ? 'green' : 'red'
         })
     }
 }
