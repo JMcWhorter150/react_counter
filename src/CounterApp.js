@@ -6,23 +6,37 @@ class CounterApp extends React.Component {
         super(props);
 
         this.state = {
-            counter: 0,
-            color: 'red'
+            buttons: []
         }
     }
 
     render() {
         return (
         <div>
-            <CounterButton counter={this.state.counter} countUp={this._countUp} color={this.state.color} />
+            {this.state.buttons.map((counter, i) => (
+                <CounterButton key={i} counter={counter.counter} index={i} countUp={this._countUp} color={counter.color} />
+            ))}
+            <button onClick={this._addButton}>Add Counter</button>
         </div>
         )
     }
 
-    _countUp = () => {
+    _countUp = (index) => {
+        const newButtons = [...this.state.buttons];
+        newButtons[index] = {
+            counter: this.state.buttons[index].counter + 1,
+            color: this.state.buttons[index].counter % 2 === 0 ? 'green' : 'red'
+        };
         this.setState({
-            counter: this.state.counter + 1,
-            color: this.state.counter % 2 === 0 ? 'green' : 'red'
+            buttons: newButtons
+        })
+    }
+
+    _addButton = () => {
+        const newButtons = [...this.state.buttons];
+        this.setState({
+            buttons: [...this.state.buttons,
+            {counter: 0, color: 'green'}]
         })
     }
 }
