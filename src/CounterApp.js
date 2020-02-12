@@ -14,7 +14,7 @@ class CounterApp extends React.Component {
         return (
         <div>
             {this.state.buttons.map((counter, i) => (
-                <CounterButton key={i} counter={counter.counter} index={i} countUp={this._countUp} color={counter.color} />
+                <CounterButton key={i} handleDelete = {this._handleDelete} counter={counter.counter} index={i} countUp={this._countUp} color={counter.color} />
             ))}
             <button onClick={this._addButton}>Add Counter</button>
         </div>
@@ -37,6 +37,14 @@ class CounterApp extends React.Component {
         this.setState({
             buttons: [...this.state.buttons,
             {counter: 0, color: 'green'}]
+        })
+    }
+
+    _handleDelete = (index) => {
+        const newButtons = [...this.state.buttons];
+        newButtons.splice(index, 1);
+        this.setState({
+            buttons: newButtons
         })
     }
 }
