@@ -23,10 +23,8 @@ class CounterApp extends React.Component {
 
     _countUp = (index) => {
         const newButtons = [...this.state.buttons];
-        newButtons[index] = {
-            counter: this.state.buttons[index].counter + 1,
-            color: this.state.buttons[index].counter % 2 === 0 ? 'green' : 'red'
-        };
+        newButtons[index].counter = this.state.buttons[index].counter + 1;
+        newButtons[index].color = newButtons[index].counter % 2 === 0 ? 'green' : 'red';
         this.setState({
             buttons: newButtons
         })
